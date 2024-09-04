@@ -10,3 +10,13 @@ export const getPosts = async () => {
 
   return [];
 }
+
+export const getPostById = async (id) => {
+  const { data } = await api.get(`/posts/${id}`);
+
+  if (data) {
+    return data;
+  }
+
+  return {};
+}
