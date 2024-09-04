@@ -4,15 +4,18 @@ import Header from '../components/Header';
 import Layout, { GradientBackground } from '../components/Layout';
 import ArrowIcon from '../components/ArrowIcon';
 import { getPosts } from '../utils/mdx-utils';
+import { getGlobalData } from '../utils/global-data';
+import SEO from '../components/SEO';
 
 
-export default function Index({ posts = [] }) {
+export default function Index({ posts, globalData }) {
   return (
     <Layout>
-      <Header name={"header"} />
+      <SEO title={globalData.name} description={globalData.blogTitle} />
+      <Header name={globalData.name} />
       <main className="w-full">
         <h1 className="text-3xl lg:text-5xl text-center mb-12">
-          {"Blog Title"}
+          {globalData.blogTitle}
         </h1>
         <ul className="w-full">
           {posts.map((post) => (
@@ -43,7 +46,7 @@ export default function Index({ posts = [] }) {
           ))}
         </ul>
       </main>
-      <Footer copyrightText={"copyright"} />
+      <Footer copyrightText={globalData.footerText} />
       <GradientBackground
         variant="large"
         className="fixed top-20 opacity-40 dark:opacity-60"
@@ -58,6 +61,7 @@ export default function Index({ posts = [] }) {
 
 export async function getServerSideProps() {
   const posts = await getPosts();
+  const globalData = getGlobalData();
 
-  return { props: { posts } };
+  return { props: { posts, globalData } };
 }
