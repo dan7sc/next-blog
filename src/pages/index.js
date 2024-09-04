@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import Layout from '../components/Layout';
+import Layout, { GradientBackground } from '../components/Layout';
 import ArrowIcon from '../components/ArrowIcon';
 import { getPosts } from '../utils/mdx-utils';
 
@@ -44,6 +44,14 @@ export default function Index({ posts = [] }) {
         </ul>
       </main>
       <Footer copyrightText={"copyright"} />
+      <GradientBackground
+        variant="large"
+        className="fixed top-20 opacity-40 dark:opacity-60"
+      />
+      <GradientBackground
+        variant="small"
+        className="absolute bottom-0 opacity-20 dark:opacity-10"
+      />
     </Layout>
   );
 }
